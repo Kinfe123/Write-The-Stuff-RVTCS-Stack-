@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.editor-class {
+    background-color: rgb(55 , 65 , 81 );
+    color: white;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+}

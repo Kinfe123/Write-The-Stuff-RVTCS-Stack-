@@ -34,7 +34,7 @@ function App() {
 
     
         <Route path="/" element={<Home />} />
-        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:id" element={<Blogs />} />
         <Route path="/write" element={<Write />} />
         <Route path='/signin' element={<SignInPage />}/>
         <Route path='/*' element={<NotFound />}/>

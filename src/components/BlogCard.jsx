@@ -1,10 +1,18 @@
+import DOMPurify from "dompurify";
+
 const BlogCard = (props) =>  {
+    
 
-
-    const {id , createdAt  , content , username , email , title} = props;
-   
-
+    const {id , createdAt  , content , username , email , title, user_profile , short} = props;
+    console.log(user_profile)
+    const createMarkup = (html) => {
+        return {
+          __html: DOMPurify.sanitize(html)
+        };
+      };
     // console.log('Te content is: ' , content)
+    const text_ = createMarkup(content)
+    console.log(text_)
     return (
 
         <div className="my-10">
@@ -13,16 +21,26 @@ const BlogCard = (props) =>  {
             <img className="rounded-t-lg" src='https://as1.ftcdn.net/v2/jpg/03/18/60/62/1000_F_318606217_Hk8jo2MVoI33SQOkYrfOF929J7JgIP0P.jpg' alt="" />
         </a>
         <div className="p-5 flex flex-col justify-start items-start text-left">
+            <div className="flex justify-center items-center gap-2 my-1">
+                <img src={user_profile} className="rounded-full w-8 h-8"/>
+                <p className="text-gray-300 mx-2"> @{username}</p>
+            </div>
             <a href="#">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                {title}
             </h5>
             </a>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 ">
-            {content.slice(0 , 170)}...
-            </p>
+            {/* <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 ">
+            <div
+                className="preview"
+                dangerouslySetInnerHTML={text_ }
+            ></div> */}
+           <p className="text-white my-3">{short}</p>
+           {/* {text_.html} */}
+            {/* {text_.slice(0 , 170)}... */}
+            {/* </p> */}
             <a
-            href="#"
+            href={`/blogs/${id}`}
             className="inline-flex justify-center self-center  items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
             Read more
