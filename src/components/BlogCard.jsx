@@ -3,8 +3,8 @@ import DOMPurify from "dompurify";
 const BlogCard = (props) =>  {
     
 
-    const {id , createdAt  , content , username , email , title, user_profile , short} = props;
-    console.log(user_profile)
+    const {id , createdAt  , content , username , email , title, user_profile , short , user_id} = props;
+    console.log(content)
     const createMarkup = (html) => {
         return {
           __html: DOMPurify.sanitize(html)
@@ -39,6 +39,7 @@ const BlogCard = (props) =>  {
            {/* {text_.html} */}
             {/* {text_.slice(0 , 170)}... */}
             {/* </p> */}
+            
             <a
             href={`/blogs/${id}`}
             className="inline-flex justify-center self-center  items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

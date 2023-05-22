@@ -46,7 +46,7 @@ const Home = () => {
         <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 '>
             {result && result.map((each) => {
                 return (
-                    <BlogCard id = {each.id} createdAt={each.created_at} email={each.email} content = {each.content}  username={each.user_name} title = {each.title} user_profile={each.user_profile } short={each.short_desc} />
+                    <BlogCard id = {each.id} createdAt={each.created_at} email={each.email} content = {each.content}  username={each.user_name} title = {each.title} user_profile={each.user_profile } short={each.short_desc} user_id={each.user_id} />
                 )
             })}
 

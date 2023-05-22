@@ -13,6 +13,7 @@ const Write = () => {
     const [title , setTitle] = useState()
     const [loading , setLoading] = useState(false)
     const [content , setContent] = useState()
+    const [short , setShort] = useState('')
     const [error , setError] = useState('')
     const [display , setDisplay] = useState('')
 
@@ -24,30 +25,30 @@ const Write = () => {
          
         
     } 
+
     const handleClick = async () => {
         
         setLoading(true)
-        console.log(convertedContent)
+       
         const converted = `...${convertedContent}'`
-        console.log(converted)
-        
+      
         const firstName = user.user.firstName
         const lastName = user.user.lastName
         const combined = (firstName && lastName) ? firstName   : firstName
-        if (!title || !content) {
-            setLoading(false)
-            setError('Please fill in all the fields correctly.')
-            return
-          }
+        // if (!title || !content ||) {
+        //     setLoading(false)
+        //     setError('Please fill in all the fields correctly.')
+        //     return
+        //   }
         const { data, error } = await supabase
         .from('posts')
         .insert([
-        { content: convertedContent, email: user.user.emailAddresses[0].emailAddress, title: title , user_name: combined , user_profile: user.user.profileImageUrl},
+        { userId: user.user.id ,  content: convertedContent, email: user.user.emailAddresses[0].emailAddress, title: title , user_name: combined , user_profile: user.user.profileImageUrl , short_desc: short},
         ]).select('*')
         
 
         if(data){
-            console.log(data)
+       
             setDisplay('✅ You have successfully bloged it.')
             setLoading(false)
             setTimeout(() => {
@@ -56,9 +57,9 @@ const Write = () => {
             } , 2000)
 
         }else {
-            setLoading(false)
+          
             setDisplay('❌ Something went wrong')
-            console.log('The error: ' , error)
+          
         }
 
         
@@ -127,11 +128,11 @@ const Write = () => {
         />
         <textarea
             id="message"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={short}
+            onChange={(e) => setShort(e.target.value)}
             rows={1}
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Say i am human..."
+            placeholder="Short Description of Blog..."
             defaultValue={""}
         />
          <button type="submit" className= "px-12 py-4 font-bold  my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleClick}>Blog It.</button>
